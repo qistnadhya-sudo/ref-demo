@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SweetFridge | Interactive Dessert Bar</title>
+  <title>SweetFridge | Realistic Fridge Interior</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -13,20 +13,17 @@
   <div id="toastContainer" class="toast-container"></div>
 
   <!-- =========================================
-       SKRIN 1: PINTU PETI SEJUK (WELCOME INTERACTIVE)
+       SKRIN 1: PINTU PETI SEJUK (LUAR)
        ========================================= -->
   <div id="fridgeDoorScreen" class="fridge-screen">
     <div class="fridge-container-3d">
       <div class="fridge-brand-label">❄️ SWEET CHILL FRIDGE ❄️</div>
       
-      <!-- Badan Peti Sejuk dengan Pintu Yang Boleh Ditekan -->
       <div class="fridge-body">
-        <!-- Pintu Kiri / Utama -->
         <div id="fridgeDoor" class="fridge-door" onclick="openFridgeDoor()">
           <div class="door-handle"></div>
           <div class="door-sticker">🍰 TEKAN SINI UNTUK BUKA PINTU! 🍨</div>
         </div>
-        <!-- Bahagian Kanan Peti Sejuk -->
         <div class="fridge-side-panel">
           <div class="dispenser-pad">
             <span class="dispenser-icon">🧊</span>
@@ -44,15 +41,15 @@
     <div class="popup-card">
       <span class="popup-emoji">🎉</span>
       <h2>Peti Sejuk Dibuka!</h2>
-      <p>Wah, rajinnya buka peti sejuk malam-malam ni! Jom pilih dessert manis sejuk kegemaran kau sekarang.</p>
+      <p>Wah, rajinnya buka peti sejuk! Jom pilih dessert manis sejuk kegemaran kau di atas rak-rak dalam ni.</p>
       <button class="bouncy-btn primary-pop" onclick="closeWelcomePopup()">
-        Tengok Menu Dalam Peti 🍦
+        Tengok Rak Dessert 🍦
       </button>
     </div>
   </div>
 
   <!-- =========================================
-       SKRIN 2: DALAM PETI SEJUK (DESSERT MENU)
+       SKRIN 2: DALAM PETI SEJUK (REALISTIK SHELVES)
        ========================================= -->
   <div id="insideFridgeApp" class="app-layout hidden">
     <header class="fridge-top-bar">
@@ -63,8 +60,8 @@
 
       <nav class="shelf-tabs">
         <button class="tab-btn active" data-shelf="all">Semua Rak ✨</button>
-        <button class="tab-btn" data-shelf="cake">Rak Kek & Pastri 🍰</button>
-        <button class="tab-btn" data-shelf="icecream">Rak Ais Krim & Sejuk 🍨</button>
+        <button class="tab-btn" data-shelf="shelf">Rak Atas (Kek) 🍰</button>
+        <button class="tab-btn" data-shelf="door">Rak Pintu (Ais Krim/Minuman) 🧋</button>
       </nav>
 
       <button id="openCartBtn" class="cart-btn">
@@ -72,15 +69,25 @@
       </button>
     </header>
 
-    <main class="fridge-interior">
+    <main class="fridge-interior-view">
       <div class="interior-banner">
-        <span>💡 Tip: Tarik pintu atau tukar rak untuk lihat menu pencuci mulut istimewa hari ini!</span>
+        <span>💡 Tip: Peti sejuk dibuka! Pilih dessert dari rak kaca utama atau rak di pintu sebelah kanan.</span>
         <button class="close-fridge-btn" onclick="closeFridgeDoor()">Tutup Semula Pintu 🚪</button>
       </div>
 
-      <!-- Rak-rak Dalam Peti Sejuk -->
-      <div id="fridgeShelvesContainer" class="shelves-interior-grid">
-        <!-- Dijana oleh script.js -->
+      <!-- STRUKTUR DALAMAN PETI SEJUK SEBENAR -->
+      <div class="fridge-cabinet-inner">
+        
+        <!-- Bahagian Kiri/Tengah: Rak Kaca Utama & Petak Bawah -->
+        <div class="fridge-main-shelves" id="mainShelvesContainer">
+          <!-- Rak Kaca 1, 2, 3 dijana melalui script.js -->
+        </div>
+
+        <!-- Bahagian Kanan: Rak-rak Pintu Peti Sejuk -->
+        <div class="fridge-door-racks" id="doorShelvesContainer">
+          <!-- Rak Pintu dijana melalui script.js -->
+        </div>
+
       </div>
     </main>
   </div>
