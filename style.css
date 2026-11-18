@@ -1,0 +1,472 @@
+:root {
+  --fridge-metal: #e2e8f0;
+  --fridge-dark: #cbd5e1;
+  --primary-pink: #ff477e;
+  --accent-yellow: #ffbe0b;
+  --text-main: #1e1b4b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #0f172a;
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .bouncy-btn {
+  font-family: 'Fredoka', sans-serif;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* =========================================
+   SKRIN 1: PINTU PETI SEJUK 3D
+   ========================================= */
+.fridge-screen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #334155 0%, #0f172a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  padding: 20px;
+}
+
+.fridge-container-3d {
+  width: 100%;
+  max-width: 380px;
+  background: #1e293b;
+  border: 4px solid #475569;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.fridge-brand-label {
+  color: #94a3b8;
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+
+.fridge-body {
+  display: flex;
+  height: 480px;
+  gap: 8px;
+  background: #090d16;
+  border-radius: 14px;
+  padding: 10px;
+  position: relative;
+  perspective: 1000px;
+}
+
+/* Pintu Peti Sejuk yang boleh ditekan */
+.fridge-door {
+  flex: 3;
+  background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transform-origin: left;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
+}
+
+.fridge-door.open-anim {
+  transform: rotateY(-115deg);
+}
+
+.door-handle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 100px;
+  background: #64748b;
+  border-radius: 999px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.door-sticker {
+  background: var(--primary-pink);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  border: 2px solid var(--text-main);
+  box-shadow: 0 4px 0 var(--text-main);
+  animation: bounceSticker 1s infinite alternate;
+}
+
+@keyframes bounceSticker {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+
+.fridge-side-panel {
+  flex: 1;
+  background: #334155;
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.dispenser-pad {
+  background: #1e293b;
+  color: #94a3b8;
+  padding: 8px 4px;
+  border-radius: 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* =========================================
+   POP-UP MESEJ
+   ========================================= */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(6px);
+  z-index: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.popup-card {
+  background: #fff;
+  border: 4px solid var(--text-main);
+  border-radius: 24px;
+  padding: 28px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 12px 0 var(--text-main);
+  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.popup-emoji {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.popup-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.popup-card p {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.bouncy-btn {
+  border: 3px solid var(--text-main);
+  border-radius: 14px;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--text-main);
+  transition: transform 0.1s;
+}
+
+.bouncy-btn:hover { transform: translateY(-2px); }
+.bouncy-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--text-main); }
+.primary-pop { background: var(--primary-pink); color: #fff; }
+.full-width { width: 100%; }
+
+/* =========================================
+   SKRIN 2: DALAM PETI SEJUK (APLIKASI)
+   ========================================= */
+.app-layout {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.fridge-top-bar {
+  background: #fff;
+  border-bottom: 3px solid var(--text-main);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.4rem;
+}
+.brand h1 { font-size: 1.4rem; }
+.brand span { color: var(--primary-pink); }
+
+.shelf-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: #f1f5f9;
+  border: 2px solid var(--text-main);
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: var(--text-main);
+  color: #fff;
+}
+
+.cart-btn {
+  background: var(--accent-yellow);
+  border: 2px solid var(--text-main);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 3px 0 var(--text-main);
+}
+
+.cart-badge {
+  background: var(--primary-pink);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+/* Interior Peti Sejuk */
+.fridge-interior {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+}
+
+.interior-banner {
+  background: #dbeafe;
+  border: 2px dashed #3b82f6;
+  padding: 12px 18px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e40af;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.close-fridge-btn {
+  background: #fff;
+  border: 2px solid var(--text-main);
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.shelves-interior-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+/* Kad Dessert dalam Peti */
+.dessert-card {
+  background: #fff;
+  border: 3px solid var(--text-main);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 0 var(--text-main);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+}
+
+.dessert-card:hover { transform: translateY(-4px); }
+
+.card-img-box {
+  width: 100%;
+  height: 160px;
+  position: relative;
+  border-bottom: 3px solid var(--text-main);
+  background: #f1f5f9;
+}
+
+.card-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shelf-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--accent-yellow);
+  border: 2px solid var(--text-main);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.card-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-body h3 {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.card-body p {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--primary-pink);
+}
+
+.add-btn {
+  background: #10b981;
+  color: #fff;
+  border: 2px solid var(--text-main);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  cursor: pointer;
+  box-shadow: 0 2px 0 var(--text-main);
+}
+
+/* =========================================
+   CART DRAWER & TOAST
+   ========================================= */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 200;
+}
+.cart-overlay.open { display: block; }
+
+.cart-drawer {
+  position: fixed;
+  top: 0; right: -100%;
+  width: 100%; max-width: 380px;
+  height: 100vh;
+  background: #fff;
+  border-left: 4px solid var(--text-main);
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+}
+.cart-drawer.open { right: 0; }
+
+.cart-header {
+  padding: 18px 20px;
+  background: var(--accent-yellow);
+  border-bottom: 3px solid var(--text-main);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  background: #fff;
+  border: 2px solid var(--text-main);
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.cart-items { flex-grow: 1; overflow-y: auto; padding: 16px 20px; }
+.cart-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 2px dashed #e2e8f0;
+}
+.qty-box { display: flex; align-items: center; gap: 6px; }
+.qty-btn {
+  width: 24px; height: 24px; border: 2px solid var(--text-main);
+  background: #f8fafc; border-radius: 6px; font-weight: 800; cursor: pointer;
+}
+
+.cart-footer { padding: 18px 20px; background: #f8fafc; border-top: 3px solid var(--text-main); }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.form-group label { font-size: 0.78rem; font-weight: 700; }
+.form-group input, .form-group select {
+  padding: 8px 12px; border: 2px solid var(--text-main); border-radius: 8px; font-family: inherit;
+}
+.total-row { display: flex; justify-content: space-between; font-size: 1.05rem; margin-bottom: 12px; }
+
+.toast-container {
+  position: fixed; top: 80px; right: 20px; z-index: 700;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.toast-item {
+  background: var(--text-main); color: #fff; border: 2px solid var(--accent-yellow);
+  padding: 10px 16px; border-radius: 10px; font-size: 0.85rem; font-weight: 700;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}

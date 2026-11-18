@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SweetFridge | Interactive Dessert Bar</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Toast Notification -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- =========================================
+       SKRIN 1: PINTU PETI SEJUK (WELCOME INTERACTIVE)
+       ========================================= -->
+  <div id="fridgeDoorScreen" class="fridge-screen">
+    <div class="fridge-container-3d">
+      <div class="fridge-brand-label">❄️ SWEET CHILL FRIDGE ❄️</div>
+      
+      <!-- Badan Peti Sejuk dengan Pintu Yang Boleh Ditekan -->
+      <div class="fridge-body">
+        <!-- Pintu Kiri / Utama -->
+        <div id="fridgeDoor" class="fridge-door" onclick="openFridgeDoor()">
+          <div class="door-handle"></div>
+          <div class="door-sticker">🍰 TEKAN SINI UNTUK BUKA PINTU! 🍨</div>
+        </div>
+        <!-- Bahagian Kanan Peti Sejuk -->
+        <div class="fridge-side-panel">
+          <div class="dispenser-pad">
+            <span class="dispenser-icon">🧊</span>
+            <small>ICE & WATER</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================
+       POP-UP MESEJ SELEPAS BUKA PINTU
+       ========================================= -->
+  <div id="welcomePopup" class="modal-backdrop hidden">
+    <div class="popup-card">
+      <span class="popup-emoji">🎉</span>
+      <h2>Peti Sejuk Dibuka!</h2>
+      <p>Wah, rajinnya buka peti sejuk malam-malam ni! Jom pilih dessert manis sejuk kegemaran kau sekarang.</p>
+      <button class="bouncy-btn primary-pop" onclick="closeWelcomePopup()">
+        Tengok Menu Dalam Peti 🍦
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================
+       SKRIN 2: DALAM PETI SEJUK (DESSERT MENU)
+       ========================================= -->
+  <div id="insideFridgeApp" class="app-layout hidden">
+    <header class="fridge-top-bar">
+      <div class="brand">
+        <span>🧊</span>
+        <h1>Sweet<span>Fridge</span></h1>
+      </div>
+
+      <nav class="shelf-tabs">
+        <button class="tab-btn active" data-shelf="all">Semua Rak ✨</button>
+        <button class="tab-btn" data-shelf="cake">Rak Kek & Pastri 🍰</button>
+        <button class="tab-btn" data-shelf="icecream">Rak Ais Krim & Sejuk 🍨</button>
+      </nav>
+
+      <button id="openCartBtn" class="cart-btn">
+        🛒 Bakul <span id="cartCount" class="cart-badge">0</span>
+      </button>
+    </header>
+
+    <main class="fridge-interior">
+      <div class="interior-banner">
+        <span>💡 Tip: Tarik pintu atau tukar rak untuk lihat menu pencuci mulut istimewa hari ini!</span>
+        <button class="close-fridge-btn" onclick="closeFridgeDoor()">Tutup Semula Pintu 🚪</button>
+      </div>
+
+      <!-- Rak-rak Dalam Peti Sejuk -->
+      <div id="fridgeShelvesContainer" class="shelves-interior-grid">
+        <!-- Dijana oleh script.js -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Slide-out Cart Drawer -->
+  <div id="cartOverlay" class="cart-overlay"></div>
+  <aside id="cartDrawer" class="cart-drawer">
+    <div class="cart-header">
+      <h3>🛒 Bakul Dessert Anda</h3>
+      <button id="closeCartBtn" class="close-btn">&times;</button>
+    </div>
+
+    <div id="cartItems" class="cart-items"></div>
+
+    <div class="cart-footer">
+      <div class="form-group">
+        <label for="custName">Nama Anda *</label>
+        <input type="text" id="custName" placeholder="Contoh: Dhiya" />
+
+        <label for="deliveryType">Kaedah Pengambilan</label>
+        <select id="deliveryType">
+          <option value="Self-Pickup (Percuma)">Self-Pickup di Kaunter (Percuma)</option>
+          <option value="COD / Hantar ke Bilik (+RM1.00)">Hantar ke Bilik / COD (+RM1.00)</option>
+        </select>
+      </div>
+
+      <div class="total-row">
+        <span>Jumlah Bayaran</span>
+        <strong id="cartTotal">RM 0.00</strong>
+      </div>
+
+      <button id="checkoutBtn" class="bouncy-btn primary-pop full-width">
+        Hantar Order ke WhatsApp 💬
+      </button>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
