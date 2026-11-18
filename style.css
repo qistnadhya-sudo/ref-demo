@@ -270,16 +270,17 @@ h1, h2, h3, .bouncy-btn {
 .fridge-main-shelves {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px; /* Tambah jarak sedikit antara rak */
 }
 
 .glass-shelf {
   background: rgba(255, 255, 255, 0.75);
   border: 2px solid #cbd5e1;
-  border-bottom: 6px solid #94a3b8; /* Kesan tebal rak kaca */
+  border-bottom: 6px solid #94a3b8;
   border-radius: 8px;
-  padding: 12px;
-  min-height: 140px;
+  /* Tambah padding atas lebih besar supaya teks label ada ruang dan tidak bertindih */
+  padding: 28px 12px 12px 12px; 
+  min-height: 150px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 12px;
@@ -288,9 +289,16 @@ h1, h2, h3, .bouncy-btn {
 
 .shelf-label-tag {
   position: absolute;
-  top: 4px; left: 8px;
-  font-size: 0.65rem; font-weight: 800; color: #64748b;
-  text-transform: uppercase; letter-spacing: 1px;
+  top: 8px; /* Anjakkan sedikit ke bawah dari border atas */
+  left: 12px;
+  font-size: 0.7rem; 
+  font-weight: 800; 
+  color: #475569;
+  text-transform: uppercase; 
+  letter-spacing: 0.5px;
+  background: rgba(255, 255, 255, 0.9); /* Tambah latar belakang comel supaya nampak kemas */
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
 /* Rak Pintu Sebelah Kanan */
